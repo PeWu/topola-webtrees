@@ -1,6 +1,3 @@
-/** URL to fetch the GEDCOM. */
-var GEDCOM_URL = 'module.php?mod=topola&mod_action=gedcom&ged=' + WT_GEDCOM;
-
 /** Will contain the GEDCOM contents when it's fetched from webtrees. */
 var gedcom = null;
 /** Set to true when the iframe has signaled it is ready to receive data. */

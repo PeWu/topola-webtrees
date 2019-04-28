@@ -77,6 +77,9 @@ class TopolaModule extends AbstractModule implements ModuleChartInterface {
                 /* I18N: Page title for interactive tree */
                 I18N::translate('Interactive tree (Topola)'))
             ->pageHeader()
+            ->addInlineJavascript(
+                'var GEDCOM_URL = "module.php?mod=' . $this->getName() .
+                '&mod_action=gedcom&ged=' . $WT_TREE->getNameUrl() . '";')
             ->addExternalJavascript(
                 WT_STATIC_URL . WT_MODULES_DIR . $this->getName() .
                     '/topola.js');
