@@ -6,7 +6,7 @@ See the [Topola Genealogy Viewer](https://pewu.github.io/topola-viewer) for exam
 
 ## Installation
 
-1. Download the current release zip file: [topola-webtrees-1.0.0.zip](https://github.com/PeWu/topola-webtrees/releases/download/1.0.0/topola-webtrees-1.0.0.zip)
-2. Unzip the file into the `modules_v3/` folder
+1. Download the current release zip file: [topola-webtrees-2.0.0.zip](https://github.com/PeWu/topola-webtrees/releases/download/2.0.0/topola-webtrees-2.0.0.zip)
+2. Unzip the file into the `modules_v4/` folder
 3. Enable the main module via *Control Panel -> Modules -> Module Administration -> Interactive tree (Topola)*
 4. Open *Charts -> Interactive tree (Topola)*
