@@ -4,6 +4,8 @@ Webtrees addon that shows an interactive tree view based on the [Topola Genealog
 
 See the [Topola Genealogy Viewer](https://pewu.github.io/topola-viewer) for examples what the visualizations look like.
 
+Please note that the addon currently does not respect privacy restrictions and always displays displays all data, i.e. always shows data for living individuals.
+
 ## Installation
 
 1. Download the current release zip file: [topola-webtrees-2.0.0.zip](https://github.com/PeWu/topola-webtrees/releases/download/2.0.0/topola-webtrees-2.0.0.zip)
