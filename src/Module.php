@@ -216,6 +216,9 @@ class Module extends AbstractModule implements ModuleCustomInterface, ModuleChar
         $service = app(GedcomExportService::class);
         $output = $service->export($tree, false, 'UTF-8', Auth::accessLevel($tree), 'CRLF');
         stream_copy_to_stream($output, $stream);
+        return response(
+            $this->getGedcomRoute($individual)
+            );
     }
 
     /**
