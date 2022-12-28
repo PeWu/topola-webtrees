@@ -212,26 +212,9 @@ class Module extends AbstractModule implements ModuleCustomInterface, ModuleChar
         Auth::checkIndividualAccess($individual, false, true);
         Auth::checkComponentAccess($this, 'chart', $tree, $user);
 
-        switch (Auth::accessLevel($tree)) {
-            case Auth::PRIV_NONE:
-                $privatize = 'gedadmin';
-                break;
-            case Auth::PRIV_USER:
-                $privatize = 'user';
-                break;
-            default:
-                $privatize = 'visitor';
-                break;
-        }
-        // $options = array(
-        //     'privatize' => $privatize,
-        //     'toANSI' => false,
-        //     'path' => '',
-        // );
-
         $stream = fopen('php://output', 'w');
         $service = app(GedcomExportService::class);
-        $output = $service->export($tree, false, 'UTF-8', 0, 'CRLF');
+        $output = $service->export($tree, false, 'UTF-8', Auth::accessLevel($tree), 'CRLF');
         stream_copy_to_stream($output, $stream);
     }
 
