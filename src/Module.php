@@ -26,9 +26,7 @@ use LilaElephant\Webtrees\Topola\Traits\ModuleCustomTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-
-use Fisharebest\Webtrees\Functions\FunctionsExport;
-// use Fisharebest\Webtrees\Services\GedcomExportService;
+use Fisharebest\Webtrees\Services\GedcomExportService;
 
 /**
  * Topola module class.
@@ -214,27 +212,10 @@ class Module extends AbstractModule implements ModuleCustomInterface, ModuleChar
         Auth::checkIndividualAccess($individual, false, true);
         Auth::checkComponentAccess($this, 'chart', $tree, $user);
 
-        switch (Auth::accessLevel($tree)) {
-            case Auth::PRIV_NONE:
-                $privatize = 'gedadmin';
-                break;
-            case Auth::PRIV_USER:
-                $privatize = 'user';
-                break;
-            default:
-                $privatize = 'visitor';
-                break;
-        }
-        // $options = array(
-        //     'privatize' => $privatize,
-        //     'toANSI' => false,
-        //     'path' => '',
-        // );
-
         $stream = fopen('php://output', 'w');
-        // FunctionsExport::exportGedcom($tree, $stream, $options);
-        // GedcomExportService::export($tree, $stream, false, 'UTF-8', 1);
-        FunctionsExport::exportGedcom($tree, $stream, 0, 'UTF-8', $privatize);
+        $service = app(GedcomExportService::class);
+        $output = $service->export($tree, false, 'UTF-8', Auth::accessLevel($tree), 'CRLF');
+        stream_copy_to_stream($output, $stream);
     }
 
     /**
