@@ -81,13 +81,13 @@ class Module extends AbstractModule implements ModuleCustomInterface, ModuleChar
     public function boot(): void
     {
         /** @var RouterContainer $routerContainer */
-        $routerContainer = app(RouterContainer::class);
+        $routerContainer = Registry::container()->get(RouterContainer::class);
 
         $routerContainer->getMap()
             ->get(self::ROUTE_DEFAULT, self::ROUTE_DEFAULT_URL, $this)
             ->allows(RequestMethodInterface::METHOD_POST);
 
-        $this->theme = app(ModuleThemeInterface::class);
+        $this->theme = Registry::container()->get(ModuleThemeInterface::class);
 
         View::registerNamespace($this->name(), $this->resourcesFolder() . 'views/');
     }
@@ -213,7 +213,7 @@ class Module extends AbstractModule implements ModuleCustomInterface, ModuleChar
         Auth::checkComponentAccess($this, 'chart', $tree, $user);
 
         $stream = fopen('php://output', 'w');
-        $service = app(GedcomExportService::class);
+        $service = Registry::container()->get(GedcomExportService::class);
         $output = $service->export($tree, false, 'UTF-8', Auth::accessLevel($tree), 'CRLF');
         stream_copy_to_stream($output, $stream);
         return response(
