@@ -10,6 +10,7 @@ namespace LilaElephant\Webtrees;
 
 use Composer\Autoload\ClassLoader;
 use LilaElephant\Webtrees\Topola\Module;
+use Fisharebest\Webtrees\Registry;
 
 // Register our namespace
 $loader = new ClassLoader();
@@ -20,4 +21,4 @@ $loader->addPsr4(
 $loader->register();
 
 // Create and return instance of the module
-return app(Module::class);
+return Registry::container()->get(Module::class);
